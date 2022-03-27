@@ -1,6 +1,9 @@
 const key = 'V8oT8eIAt3gQ2xql5GGuMXfYNNAb7dyd';
 const weather = 'http://dataservice.accuweather.com/currentconditions/v1/{locationKey}';
 
+
+
+
 //get city information 
 const getCity = async (city) => {
   const base = 'http://dataservice.accuweather.com/locations/v1/cities/search'; //base url for api endpoint
@@ -22,10 +25,3 @@ const getWeather = async (id) => {
 
   return data[0];
 };
-
-//getCity & getWeather functions return a promise, so chain .then & .catch
-getCity('Kolkata').then(data => {
-  return getWeather(data.Key);
-}).then(data => console.log(data))
-.catch(err => console.log(err));  
-
