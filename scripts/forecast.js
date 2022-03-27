@@ -12,7 +12,20 @@ const getCity = async (city) => {
   return data[0]; //return closest match to request
 };
 
-getCity('Kolkata') //getCity function returns a promise, so chain .then & .catch
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
+//get weather information
+const getWeather = async (id) => {
+  const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
+  const query = `${id}?apikey=${key}`;
+
+  const response = await fetch(base + query);
+  const data = await response.json();
+
+  return data[0];
+};
+
+//getCity & getWeather functions return a promise, so chain .then & .catch
+getCity('Kolkata').then(data => {
+  return getWeather(data.Key);
+}).then(data => console.log(data))
+.catch(err => console.log(err));  
 
